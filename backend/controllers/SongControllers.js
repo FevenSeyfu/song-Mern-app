@@ -98,9 +98,9 @@ export const removeSong = async (req, res) => {
 export const returnStatistics = async (req, res) => {
   try {
     const totalSongs = await Song.countDocuments();
-    const totalArtists = await Song.distinct("artist").length;
-    const totalAlbums = await Song.distinct("album").length;
-    const totalGenres = await Song.distinct("genre").length;
+    const totalArtists = (await Song.distinct("artist")).length;
+    const totalAlbums = (await Song.distinct("album")).length;
+    const totalGenres = (await Song.distinct("genre")).length;
     const songsByGenre = await Song.aggregate([
       { $group: { _id: "$genre", count: { $sum: 1 } } },
     ]);
@@ -113,7 +113,7 @@ export const returnStatistics = async (req, res) => {
     const albumsByArtist = await Song.aggregate([
       { $group: { _id: "$artist", albums: { $addToSet: "$album" } } },
     ]);
-    console.log(totalAlbums)
+    console.log(Song.distinct("artist"))
     return res.status(200).json({
       success : true,
       message: 'Successfully fetched over all statistics',

@@ -113,7 +113,7 @@ export const returnStatistics = async (req, res) => {
     const albumsByArtist = await Song.aggregate([
       { $group: { _id: "$artist", albums: { $addToSet: "$album" } } },
     ]);
-
+    console.log(totalAlbums)
     return res.status(200).json({
       success : true,
       message: 'Successfully fetched over all statistics',
@@ -128,6 +128,7 @@ export const returnStatistics = async (req, res) => {
         albumsByArtist,
       },
     });
+    
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ success: false, message: error.message });

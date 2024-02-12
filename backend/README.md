@@ -120,15 +120,21 @@ http://localhost:3000/songs/
 
     ```json
     {
-        "totalSongs": 10 ,
-        "totalArtists": 10 ,
-        "totalAlbums": 10 ,
-        "totalGenres": 10 ,
-        "songsByGenre": [...],
-        "songsByArtist": [...],
-        "songsByAlbum": [...],
-        "albumsByArtist": [...]
+       "success": true,
+        "message": "Successfully fetch overall statistics",
+        "result": {
+            "totalSongs": 11,
+            "totalArtists": 10,
+            "totalAlbums": 11,
+            "totalGenres": 4,
+            "songsByGenre": [...],
+            "songsByArtist": [...],
+            "songsByAlbum": [...],
+            "albumsByArtist": [...]
+        }
     }
+    ```
+
 - **Explanation:**
   - **totalSongs:** Total number of songs in the database.
   - **totalArtists:** Total number of artists in the database.

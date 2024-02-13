@@ -111,7 +111,7 @@ export const returnStatistics = async (req, res) => {
       { $group: { _id: "$album", count: { $sum: 1 }, Songs: { $addToSet: "$title" } } },
     ]);
     const albumsByArtist = await Song.aggregate([
-      { $group: { _id: "$artist",count: { $sum: 1 } , Songs: { $addToSet: "$title" } } },
+      { $group: { _id: "$artist",count: { $sum: 1 } , Albums: { $addToSet: "$album" } } },
     ]);
     return res.status(200).json({
       success : true,

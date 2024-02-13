@@ -120,18 +120,42 @@ https://song-api-pncl.onrender.com/songs/
 
     ```json
     {
-       "success": true,
-        "message": "Successfully fetch overall statistics",
-        "result": {
-            "totalSongs": 11,
-            "totalArtists": 10,
-            "totalAlbums": 11,
-            "totalGenres": 4,
-            "songsByGenre": [...],
-            "songsByArtist": [...],
-            "songsByAlbum": [...],
-            "albumsByArtist": [...]
-        }
+      "success": true,
+      "message": "Successfully fetch overall statistics",
+      "result": {
+        "songsByGenre": [
+          {
+            "Genre": "Jazz",
+            "TotalSongsByGenre": 3,
+            "Songs": ["So What", "Take Five", "My Favorite Things"]
+          },
+          // More items...
+        ],
+        "songsByArtist": [
+          {
+            "Artist": "Guns N' Roses",
+            "TotalSongsByArtist": 1,
+            "Songs": ["Sweet Child o' Mine"]
+          }
+          // More items...
+        ],
+        "songsByAlbum": [
+          {
+            "Album": "Texas Flood",
+            "TotalSongsByAlbum": 1,
+            "Songs": ["Pride and Joy"]
+          }
+          // More items...
+        ],
+        "albumsByArtist": [
+          {
+            "Artist": "Guns N' Roses",
+            "TotalAlbums": 1,
+            "Albums": ["Appetite for Destruction"]
+          }
+          // More items...
+        ]
+      }
     }
     ```
 

@@ -102,16 +102,17 @@ export const returnStatistics = async (req, res) => {
     const totalAlbums = (await Song.distinct("album")).length;
     const totalGenres = (await Song.distinct("genre")).length;
     const songsByGenre = await Song.aggregate([
-      { $group: { _id: "$genre", count: { $sum: 1 }, Songs: { $addToSet: "$title" } } },
+      { $group: { _id: "$genre", TotalSongsByGenre: { $sum: 1 }, Songs: { $addToSet: "$title" } } },
     ]);
     const songsByArtist = await Song.aggregate([
-      { $group: { _id: "$artist", count: { $sum: 1 },Songs: { $addToSet: "$title" } } },
+      { $group: { _id: "$artist", TotalSongsByArtist: { $sum: 1 },Songs: { $addToSet: "$title" } } },
     ]);
     const songsByAlbum = await Song.aggregate([
-      { $group: { _id: "$album", count: { $sum: 1 }, Songs: { $addToSet: "$title" } } },
+      { $group: { _id: "$album", TotalSongsByAlbum: { $sum: 1 }, Songs: { $addToSet: "$title" } } },
     ]);
     const albumsByArtist = await Song.aggregate([
-      { $group: { _id: "$artist",count: { $sum: 1 } , Songs: { $addToSet: "$title" } } },
+      { $group: { _id: { artist: "$artist", album: "$album" } } }, 
+      { $group: { _id: "$_id.artist", TotalAlbums: { $sum: 1 }, Albums: { $addToSet: "$_id.album" } } }, 
     ]);
     return res.status(200).json({
       success : true,

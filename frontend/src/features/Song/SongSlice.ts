@@ -94,6 +94,9 @@ export const songSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    reset(state) {
+        Object.assign(state, initialState)
+    }
   },
 });
 

@@ -72,24 +72,25 @@ export const songSlice = createSlice({
     deleteSong: (state) => {
       (state.isLoading = true), (state.error = null);
     },
-    deleteSongSuccess: (state, action: PayloadAction<string>) => {
-      state.songs = state.songs.filter((song) => song.title !== action.payload);
-      state.isLoading = false;
+    deleteSongSuccess: (state, action: PayloadAction<{ title: string; artist: string }>) => {
+        state.isLoading = false;
+        const { title, artist } = action.payload;
+        state.songs = state.songs.filter((song) => !(song.title === title && song.artist === artist));
     },
     deleteSongFailure: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.error = action.payload;
     },
     // song statistics
-    songStats: (state) => {
+    fetchSongsStats: (state) => {
       state.isLoading = true;
       state.error = null;
     },
-    songStatsSuccess: (state, action: PayloadAction<Song[]>) => {
+    FetchSongsStatsSuccess: (state, action: PayloadAction<Song[]>) => {
       state.songs = action.payload;
       state.isLoading = false;
     },
-    songStatsFailure: (state, action: PayloadAction<string>) => {
+    FetchSongsStatsFailure: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.error = action.payload;
     },
@@ -97,6 +98,21 @@ export const songSlice = createSlice({
 });
 
 // fetch,create,update,delete,songsStats
-export const { fetchSongs, fetchSongsSuccess, fetchSongsFailure,createSong,createSongSuccess,createSongFailure } =
-  songSlice.actions;
+export const { 
+    fetchSongs, 
+    fetchSongsSuccess, 
+    fetchSongsFailure,
+    createSong,
+    createSongSuccess,
+    createSongFailure,
+    updateSong,
+    updateSongSuccess,
+    updateSongFailure,
+    deleteSong,
+    deleteSongSuccess,
+    deleteSongFailure,
+    fetchSongsStats,
+    FetchSongsStatsSuccess,
+    FetchSongsStatsFailure
+} = songSlice.actions;
 export default songSlice.reducer;

@@ -1,12 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { create } from "domain";
-
-interface Song {
-  title: string;
-  artist: string;
-  album: string;
-  genre: string;
-}
+import { Song } from "../../types/types";
 
 interface SongState {
   songs: Song[];
@@ -20,8 +13,8 @@ const initialState: SongState = {
   error: null,
 };
 
-export const songSlice = createSlice({
-  name: "song",
+export const songsSlice = createSlice({
+  name: "songs",
   initialState,
   reducers: {
     // list song
@@ -117,5 +110,5 @@ export const {
     fetchSongsStats,
     FetchSongsStatsSuccess,
     FetchSongsStatsFailure
-} = songSlice.actions;
-export default songSlice.reducer;
+} = songsSlice.actions;
+export default songsSlice.reducer;

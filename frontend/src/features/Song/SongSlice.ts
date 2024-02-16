@@ -1,18 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { create } from "domain";
-
-interface Song {
-  title: string;
-  artist: string;
-  album: string;
-  genre: string;
-}
-
-interface SongState {
-  songs: Song[];
-  isLoading: boolean;
-  error: string | null;
-}
+import { Song } from "../../types/types";
+import { SongState } from "../../types/types";
 
 const initialState: SongState = {
   songs: [],
@@ -20,8 +8,8 @@ const initialState: SongState = {
   error: null,
 };
 
-export const songSlice = createSlice({
-  name: "song",
+export const songsSlice = createSlice({
+  name: "songs",
   initialState,
   reducers: {
     // list song
@@ -57,7 +45,7 @@ export const songSlice = createSlice({
     },
     updateSongSuccess: (state, action: PayloadAction<Song>) => {
       const index = state.songs.findIndex(
-        (song) => song.title === action.payload.title
+        (song) => song._id === action.payload._id
       );
       if (index !== -1) {
         state.songs[index] = action.payload;
@@ -70,12 +58,13 @@ export const songSlice = createSlice({
     },
     // delete song
     deleteSong: (state) => {
-      (state.isLoading = true), (state.error = null);
+      state.isLoading = true;
+      state.error = null
     },
-    deleteSongSuccess: (state, action: PayloadAction<{ title: string; artist: string }>) => {
+    deleteSongSuccess: (state, action: PayloadAction<string>) => {
         state.isLoading = false;
-        const { title, artist } = action.payload;
-        state.songs = state.songs.filter((song) => !(song.title === title && song.artist === artist));
+        const id = action.payload;
+        state.songs = state.songs.filter((song) => song._id !== id);
     },
     deleteSongFailure: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
@@ -117,5 +106,5 @@ export const {
     fetchSongsStats,
     FetchSongsStatsSuccess,
     FetchSongsStatsFailure
-} = songSlice.actions;
-export default songSlice.reducer;
+} = songsSlice.actions;
+export default songsSlice.reducer;

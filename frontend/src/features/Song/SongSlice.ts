@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Song } from "../../types/types";
+import { NewSong } from "../../types/types";
 import { SongState } from "../../types/types";
 
 const initialState: SongState = {
@@ -26,7 +27,7 @@ export const songsSlice = createSlice({
       state.error = action.payload;
     },
     // create song
-    createSong: (state) => {
+    createSong: (state, action: PayloadAction<NewSong>) => {
       state.isLoading = true;
       state.error = null;
     },

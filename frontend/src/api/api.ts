@@ -3,6 +3,7 @@
 // List - GET /songs
 
 import { Song } from "../types/types";
+import { NewSong } from "../types/types";
 const API_BASE_URL = "https://song-api-pncl.onrender.com/songs";
 
 export const fetchSongsApi = async (): Promise<Song[]> => {
@@ -14,7 +15,7 @@ export const fetchSongsApi = async (): Promise<Song[]> => {
   return data.result;
 };
 
-export const createSongApi = async (newSong: Song) => {
+export const createSongApi = async (newSong: NewSong) => {
   const response = await fetch(`${API_BASE_URL}`, {
     method: "POST",
     headers: {

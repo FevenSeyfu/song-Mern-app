@@ -1,4 +1,5 @@
 import { all, call, put, takeEvery } from "redux-saga/effects";
+import { NewSong } from "../../types/types";
 import { Song } from "../../types/types";
 import {
   fetchSongs,
@@ -42,13 +43,14 @@ function * watchFetchSongsSaga() {
 // create song worker and watcher
 function* createSongSaga(action: ReturnType<typeof createSong>) {
     try {
-        const newSong: Song = action.payload!;
+        const newSong: NewSong = action.payload!;
         const createdSong: Song = yield call(createSongApi, newSong);
         yield put(createSongSuccess(createdSong));
     } catch (error) {
         yield put(createSongFailure((error as Error).message));
     }
 }
+
 function* watchCreateSongSaga() {
     yield takeEvery(createSong.type, createSongSaga);
 }

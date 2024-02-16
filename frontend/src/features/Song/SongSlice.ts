@@ -1,11 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Song } from "../../types/types";
-
-interface SongState {
-  songs: Song[];
-  isLoading: boolean;
-  error: string | null;
-}
+import { SongState } from "../../types/types";
 
 const initialState: SongState = {
   songs: [],

@@ -86,6 +86,7 @@ function* watchDeleteSongSaga() {
 function* fetchSongsStatsSaga() {
     try {
         const songs: Song[] = yield call(fetchSongsStatsApi);
+        console.log(songs)
         yield put(FetchSongsStatsSuccess(songs));
     } catch (error) {
         yield put(FetchSongsStatsFailure((error as Error).message));

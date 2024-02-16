@@ -40,7 +40,7 @@ export const songsSlice = createSlice({
       state.error = action.payload;
     },
     // update song
-    updateSong: (state) => {
+    updateSong: (state,action: PayloadAction<Song>) => {
       state.isLoading = true;
       state.error = null;
     },

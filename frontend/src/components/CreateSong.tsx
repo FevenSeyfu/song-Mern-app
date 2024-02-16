@@ -1,10 +1,12 @@
 import React,{useState} from 'react'
 import { useDispatch } from 'react-redux';
 import { createSong } from '../features/Song/SongSlice';
+import { useNavigate } from 'react-router-dom';
 
 const CreateSong: React.FC  = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  
   const [title, setTitle] = useState('');
   const [artist, setArtist] = useState('');
   const [album, setAlbum] = useState('');
@@ -19,9 +21,9 @@ const CreateSong: React.FC  = () => {
     setArtist('');
     setAlbum('');
     setGenre('');
-
+    navigate('/')
   }
-
+  
   return (
     <form onSubmit={handleSubmit}>
       <h1>Create Song</h1>

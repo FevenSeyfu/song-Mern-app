@@ -1,12 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Song } from "../../types/types";
-import { NewSong } from "../../types/types";
-import { SongState } from "../../types/types";
+import { Song,NewSong,SongStats,SongState } from "../../types/types";
 
 const initialState: SongState = {
   songs: [],
   isLoading: false,
   error: null,
+  songStats: null,
 };
 
 export const songsSlice = createSlice({
@@ -76,8 +75,8 @@ export const songsSlice = createSlice({
       state.isLoading = true;
       state.error = null;
     },
-    FetchSongsStatsSuccess: (state, action: PayloadAction<Song[]>) => {
-      state.songs = action.payload;
+    FetchSongsStatsSuccess: (state, action: PayloadAction<SongStats>) => {
+      state.songStats = action.payload;
       state.isLoading = false;
     },
     FetchSongsStatsFailure: (state, action: PayloadAction<string>) => {

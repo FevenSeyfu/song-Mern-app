@@ -61,5 +61,6 @@ export const fetchSongsStatsApi = async (): Promise<Song[]> => {
   if (!response.ok) {
     throw new Error(`Failed to fetch song statistics. Status: ${response.status}`);
   }
-  return response.json();
+  const data = await response.json();
+  return data.result;
 }

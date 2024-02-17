@@ -58,7 +58,7 @@ export const songsSlice = createSlice({
       state.error = action.payload;
     },
     // delete song
-    deleteSong: (state) => {
+    deleteSong: (state,action: PayloadAction<string>) => {
       state.isLoading = true;
       state.error = null
     },

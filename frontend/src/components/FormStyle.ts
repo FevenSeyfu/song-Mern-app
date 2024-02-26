@@ -52,3 +52,27 @@ export const StyledButton = styled.button`
     background-color: #9290c3;
   }
 `;
+
+export const StyledActiveButton = styled.button`
+  align-self: center;
+  padding: 10px;
+  margin: 1rem 5px;
+  color: #070f2b;
+  background-color: #9290c3;
+  border: 1px solid #9290c3;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 4px;
+  font-weight: bold;
+  &:hover {
+    background: none;
+    color: #9290c3;
+  }
+`;
+
+export const ButtonContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;

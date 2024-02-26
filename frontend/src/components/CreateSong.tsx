@@ -84,7 +84,7 @@ const CreateSong: React.FC<CreateSongProps> = ({ onClose }) => {
         </StyledLabel>
 
         <StyledButton type="submit" disabled={isLoading}>
-          {isLoading ? "Loading" : "Create Song "}
+          {isLoading ? "Loading" : "Create "}
         </StyledButton>
       </StyledForm>
     </>

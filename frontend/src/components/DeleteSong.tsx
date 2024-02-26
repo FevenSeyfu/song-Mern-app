@@ -2,17 +2,24 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteSong } from "../features/Song/SongSlice";
 import { RootState } from "../app/store";
+import { IoClose } from "react-icons/io5";
+import {
+  CloseButton,
+  StyledForm,
+  StyledH1,
+  StyledButton,
+  StyledActiveButton,
+  ButtonContainer,
+} from "./FormStyle";
 
 interface DeleteSongProps {
   onClose: () => void;
-  id:string
+  id: string;
 }
-const DeleteSong: React.FC<DeleteSongProps>= ({onClose,id}) => {
+const DeleteSong: React.FC<DeleteSongProps> = ({ onClose, id }) => {
   const dispatch = useDispatch();
 
-  const { songs, isLoading } = useSelector(
-    (state: RootState) => state.songs
-  );
+  const { songs, isLoading } = useSelector((state: RootState) => state.songs);
 
   const selectedSong = songs.find((song) => song._id === id);
 
@@ -27,16 +34,27 @@ const DeleteSong: React.FC<DeleteSongProps>= ({onClose,id}) => {
     }
   };
   return (
-    <form>
-      <h1>Delete Song</h1>
-      <p>
-        Are you sure you want to delete <b>{selectedSong && selectedSong.title}</b> by {" "}
-        <b>{selectedSong && selectedSong.artist}</b>?
-      </p>
-
-      <button onClick={() => onClose()} disabled={isLoading}>Cancel</button>
-      <button onClick={handleDelete} disabled={isLoading}>Delete</button>
-    </form>
+    <>
+      <CloseButton onClick={() => onClose()}>
+        <IoClose size={30} style={{ textAlign: "right" }} />
+      </CloseButton>
+      <StyledForm>
+        <StyledH1>Delete Song</StyledH1>
+        <p>
+          Are you sure you want to delete{" "}
+          <b>{selectedSong && selectedSong.title}</b> by{" "}
+          <b>{selectedSong && selectedSong.artist}</b>?
+        </p>
+        <ButtonContainer>
+          <StyledActiveButton onClick={() => onClose()} disabled={isLoading}>
+            {isLoading ? "Loading" : "Cancel "}
+          </StyledActiveButton>
+          <StyledButton onClick={handleDelete} disabled={isLoading}>
+            {isLoading ? "Loading" : "Delete "}
+          </StyledButton>
+        </ButtonContainer>
+      </StyledForm>
+    </>
   );
 };
 

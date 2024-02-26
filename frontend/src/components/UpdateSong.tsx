@@ -47,13 +47,14 @@ const UpdateSong: React.FC<UpdateSongProps> = ({ onClose, id }) => {
       album,
       genre,
     };
-    dispatch(updateSong(updatedSong));
-    dispatch(fetchSongs());
+    await dispatch(updateSong(updatedSong));
     setTitle("");
     setArtist("");
     setAlbum("");
     setGenre("");
-    onClose();
+    if(!isLoading && !error){
+      onClose();
+    }
   };
   return (
     <>
@@ -100,9 +101,8 @@ const UpdateSong: React.FC<UpdateSongProps> = ({ onClose, id }) => {
             required
           />
         </StyledLabel>
-
         <StyledButton type="submit" disabled={isLoading}>
-          Update
+          {isLoading ? "Loading" : "Update "}
         </StyledButton>
       </StyledForm>
     </>

@@ -6,12 +6,59 @@ import { RootState } from "../app/store";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import { IoMdAdd } from "react-icons/io";
+import { FaSpinner } from "react-icons/fa6";
 import Modal from "./Modal/Modal";
 import CreateSong from "./CreateSong";
 import UpdateSong from "./UpdateSong";
 import DeleteSong from "./DeleteSong";
-import { Flex, Heading, Button, Image,Text,Box } from "rebass";
+import { Flex, Heading, Image, Text, Box } from "rebass";
+import styled from "@emotion/styled";
 
+const Button = styled.button`
+  padding: 2px 4px;
+  margin: 5px;
+  background: none;
+  border: 1px solid #9290c3;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 4px;
+  color: #9290c3;
+  font-weight: bold;
+  &:hover {
+    color: #070f2b;
+    background-color: #9290c3;
+  }
+  @media (max-width: 768px) {
+    padding: 2px 3px;
+    margin: 3px;
+    font-size: 1rem;
+  }
+`;
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+const SongImage = styled(Image)`
+  height: 36px;
+  padding-right: 20px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const ResponsiveFlex = styled(Flex)`
+  padding: 1rem;
+
+  @media (min-width: 768px) {
+    padding: 2rem;
+  }
+`;
 const ListSongs: React.FC = () => {
   const dispatch = useDispatch();
 
@@ -38,82 +85,115 @@ const ListSongs: React.FC = () => {
     dispatch(fetchSongs());
   }, [dispatch]);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   if (error) {
     return <div>Error: {error}</div>;
   }
 
   return (
-    <Flex flexDirection={"column"}>
-      <Flex
-        flexDirection={"row"}
-        justifyContent={"space-between"}
-        alignItems={"center"}
-      >
-        <Heading fontSize={"2rem"} color={"#c1121f"}>
+    <ResponsiveFlex flexDirection={"column"}>
+      <Flex flexDirection={"row"} alignItems={"center"}>
+        <Heading fontSize={"2rem"} marginRight={"1rem"}>
           Songs
         </Heading>
         <Button
           onClick={() =>
             handleOpenModal(<CreateSong onClose={handleCloseModal} />)
           }
-          backgroundColor="white"
-          color="#c1121f"
-          fontSize={"2rem"}
         >
           <IoMdAdd />
         </Button>
       </Flex>
-      {songs.map((song: Song) => {
-        return (
-          <Box key={song._id}>
-            <Text>
-              <Image
-                src="../assets/sound-icon.png"
-              />
-              <Text>
-                <h2>{song.title}</h2>
-                <p>{song.artist}</p>
-              </Text>
-              <Text>
-                <p>{song.album}</p>
-              </Text>
-              <Text>
-                <p>{song.genre}</p>
-              </Text>
-              <Text>
-                <button
-                  onClick={() =>
-                    handleOpenModal(
-                      <UpdateSong onClose={handleCloseModal} id={song._id} />
-                    )
-                  }
-                >
-                  <CiEdit />
-                </button>
-                <button
-                  onClick={() =>
-                    handleOpenModal(
-                      <DeleteSong onClose={handleCloseModal} id={song._id} />
-                    )
-                  }
-                >
-                  <MdOutlineDeleteOutline />
-                </button>
-              </Text>
-            </Text>
-          </Box>
-        );
-      })}
+      <hr
+        style={{
+          width: "100%",
+          borderColor: "#9290C3",
+          borderWidth: "2px",
+          marginBottom: "1rem",
+        }}
+      />
+      <Flex
+        flexDirection={"row"}
+        justifyContent={"space-between"}
+        alignItems={"center"}
+      >
+        <Text width={"25%"} fontWeight={"bold"}>
+          Song
+        </Text>
+        <Text width={"25%"} fontWeight={"bold"}>
+          Album
+        </Text>
+        <Text fontWeight={"bold"}>Genre</Text>
+        <Text fontWeight={"bold"}>Actions</Text>
+      </Flex>
+      {isLoading ? (
+        <Text
+          fontWeight="bold"
+          textAlign={"center"}
+          fontSize={"1.5rem"}
+          marginY={"10%"}
+        >
+          <FaSpinner />
+          Loading...
+        </Text>
+      ) : (
+        songs.map((song: Song, index: number) => {
+          return (
+            <>
+              <Flex
+                key={song._id}
+                flexDirection={"row"}
+                justifyContent={"space-between"}
+                alignItems={"center"}
+              >
+                <Flex alignItems={"center"} width={"25%"}>
+                  <SongImage src="../../assets/sound-icon.png" />
+                  <Box>
+                    <h3>{song.title}</h3>
+                    <p>{song.artist}</p>
+                  </Box>
+                </Flex>
+                <Text width={"25%"}>{song.album}</Text>
+                <Text textAlign={"center"}>{song.genre}</Text>
+                <ButtonContainer>
+                  <Button
+                    onClick={() =>
+                      handleOpenModal(
+                        <UpdateSong onClose={handleCloseModal} id={song._id} />
+                      )
+                    }
+                  >
+                    <CiEdit />
+                  </Button>
+                  <Button
+                    onClick={() =>
+                      handleOpenModal(
+                        <DeleteSong onClose={handleCloseModal} id={song._id} />
+                      )
+                    }
+                  >
+                    <MdOutlineDeleteOutline />
+                  </Button>
+                </ButtonContainer>
+              </Flex>
+              {index !== songs.length - 1 && (
+                <hr
+                  style={{
+                    width: "100%",
+                    borderColor: "#9290C3",
+                    marginBottom: "1rem",
+                  }}
+                />
+              )}
+            </>
+          );
+        })
+      )}
       <Modal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         component={modalContent}
       />
-    </Flex>
+    </ResponsiveFlex>
   );
 };
 

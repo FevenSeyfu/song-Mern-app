@@ -13,7 +13,10 @@ export const ModalOverlay = styled.div`
 `;
 
 export const ModalContainer = styled.div`
-  background: white;
-  max-width: 500px;
+  background: #070F2B;
+  width: 30vw;
   padding: 20px;
-  border-radius: 8px;`;
+  border-radius: 8px;
+  @media (max-width: 768px) {
+    width: 70vw;
+  }`;

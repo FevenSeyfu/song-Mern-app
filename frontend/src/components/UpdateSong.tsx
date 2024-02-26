@@ -1,23 +1,32 @@
-import React,{useState,useEffect} from 'react'
-import { useDispatch,useSelector } from 'react-redux';
-import { fetchSongs, updateSong } from '../features/Song/SongSlice';
-import { RootState } from '../app/store';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSongs, updateSong } from "../features/Song/SongSlice";
+import { RootState } from "../app/store";
+import { IoClose } from "react-icons/io5";
+import {
+  CloseButton,
+  StyledForm,
+  StyledH1,
+  StyledLabel,
+  StyledButton,
+  StyledInput
+} from "./FormStyle";
 
 interface UpdateSongProps {
   onClose: () => void;
-  id:string
+  id: string;
 }
 
-const UpdateSong: React.FC<UpdateSongProps> = ({onClose,id}) => {
+const UpdateSong: React.FC<UpdateSongProps> = ({ onClose, id }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
-  const {songs,isLoading,error} = useSelector((state: RootState) => state.songs);
-  
-  const [title, setTitle] = useState('');
-  const [artist, setArtist] = useState('');
-  const [album, setAlbum] = useState('');
-  const [genre, setGenre] = useState('');
+  const { songs, isLoading, error } = useSelector(
+    (state: RootState) => state.songs
+  );
+
+  const [title, setTitle] = useState("");
+  const [artist, setArtist] = useState("");
+  const [album, setAlbum] = useState("");
+  const [genre, setGenre] = useState("");
 
   useEffect(() => {
     const selectedSong = songs.find((song) => song._id === id);
@@ -29,10 +38,10 @@ const UpdateSong: React.FC<UpdateSongProps> = ({onClose,id}) => {
       setGenre(selectedSong.genre);
     }
   }, [id, songs]);
-  const handleUpdate = async(e: React.FormEvent) =>{
+  const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     const updatedSong = {
-      _id: id || '', 
+      _id: id || "",
       title,
       artist,
       album,
@@ -40,38 +49,64 @@ const UpdateSong: React.FC<UpdateSongProps> = ({onClose,id}) => {
     };
     dispatch(updateSong(updatedSong));
     dispatch(fetchSongs());
-    setTitle('');
-    setArtist('');
-    setAlbum('');
-    setGenre('');
-    onClose()
-  }
+    setTitle("");
+    setArtist("");
+    setAlbum("");
+    setGenre("");
+    onClose();
+  };
   return (
-    <form onSubmit={handleUpdate}>
-    <h1>Update Song</h1>
+    <>
+      <CloseButton onClick={() => onClose()}>
+        <IoClose size={30} style={{ textAlign: "right" }} />
+      </CloseButton>
+      <StyledForm onSubmit={handleUpdate}>
+        <StyledH1>Update Song</StyledH1>
+        <StyledLabel>
+          Title:
+          <StyledInput
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+        </StyledLabel>
 
-    <label>
-      Title:
-      <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
-    </label>
+        <StyledLabel>
+          Artist:
+          <StyledInput
+            type="text"
+            value={artist}
+            onChange={(e) => setArtist(e.target.value)}
+            required
+          />
+        </StyledLabel>
 
-    <label>
-      Artist:
-      <input type="text" value={artist} onChange={(e) => setArtist(e.target.value)} required />
-    </label>
+        <StyledLabel>
+          Album:
+          <StyledInput
+            type="text"
+            value={album}
+            onChange={(e) => setAlbum(e.target.value)}
+            required
+          />
+        </StyledLabel>
+        <StyledLabel>
+          Genre:
+          <StyledInput
+            type="text"
+            value={genre}
+            onChange={(e) => setGenre(e.target.value)}
+            required
+          />
+        </StyledLabel>
 
-    <label>
-      Album:
-      <input type="text" value={album} onChange={(e) => setAlbum(e.target.value)} required />
-    </label>
-    <label>
-      Genre:
-      <input type="text" value={genre} onChange={(e) => setGenre(e.target.value)} required />
-    </label>
+        <StyledButton type="submit" disabled={isLoading}>
+          Update
+        </StyledButton>
+      </StyledForm>
+    </>
+  );
+};
 
-    <button type="submit" disabled={isLoading}>Update Song</button>
-  </form>
-  )
-}
-
-export default UpdateSong
+export default UpdateSong;

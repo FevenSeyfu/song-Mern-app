@@ -1,25 +1,23 @@
 import React,{useState,useEffect} from 'react'
 import { useDispatch,useSelector } from 'react-redux';
-import { fetchSongs,updateSong } from '../features/Song/SongSlice';
+import { fetchSongs, updateSong } from '../features/Song/SongSlice';
 import { RootState } from '../app/store';
-import { useNavigate,useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const UpdateSong: React.FC = () => {
+interface UpdateSongProps {
+  onClose: () => void;
+  id:string
+}
+
+const UpdateSong: React.FC<UpdateSongProps> = ({onClose,id}) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-
+  const navigate = useNavigate()
   const {songs,isLoading,error} = useSelector((state: RootState) => state.songs);
-  const { id } = useParams();
   
   const [title, setTitle] = useState('');
   const [artist, setArtist] = useState('');
   const [album, setAlbum] = useState('');
   const [genre, setGenre] = useState('');
-
-  useEffect(()=>{
-    dispatch(fetchSongs());
-  
-  },[dispatch]);
 
   useEffect(() => {
     const selectedSong = songs.find((song) => song._id === id);
@@ -31,7 +29,7 @@ const UpdateSong: React.FC = () => {
       setGenre(selectedSong.genre);
     }
   }, [id, songs]);
-  const handleUpdate = (e: React.FormEvent) =>{
+  const handleUpdate = async(e: React.FormEvent) =>{
     e.preventDefault();
     const updatedSong = {
       _id: id || '', 
@@ -41,14 +39,13 @@ const UpdateSong: React.FC = () => {
       genre,
     };
     dispatch(updateSong(updatedSong));
-        
+    dispatch(fetchSongs());
     setTitle('');
     setArtist('');
     setAlbum('');
     setGenre('');
-    navigate('/')
+    onClose()
   }
-
   return (
     <form onSubmit={handleUpdate}>
     <h1>Update Song</h1>
@@ -72,7 +69,7 @@ const UpdateSong: React.FC = () => {
       <input type="text" value={genre} onChange={(e) => setGenre(e.target.value)} required />
     </label>
 
-    <button type="submit">Update Song</button>
+    <button type="submit" disabled={isLoading}>Update Song</button>
   </form>
   )
 }

@@ -1,34 +1,26 @@
-import React,{useEffect} from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSongs, deleteSong } from "../features/Song/SongSlice";
+import { deleteSong } from "../features/Song/SongSlice";
 import { RootState } from "../app/store";
-import { useNavigate, useParams } from "react-router-dom";
 
-const DeleteSong: React.FC = () => {
+interface DeleteSongProps {
+  onClose: () => void;
+  id:string
+}
+const DeleteSong: React.FC<DeleteSongProps>= ({onClose,id}) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  const { songs, isLoading, error } = useSelector(
+  const { songs, isLoading } = useSelector(
     (state: RootState) => state.songs
   );
-  const { id } = useParams<{ id: string }>();
-  useEffect(()=>{
-    dispatch(fetchSongs());
-  
-  },[dispatch]);
+
   const selectedSong = songs.find((song) => song._id === id);
 
   const handleDelete = async () => {
     try {
       if (id) {
         dispatch(deleteSong(id));
-        navigate("/");
-        if (isLoading) {
-          return <p>Loading...</p>;
-        }
-        if (error) {
-          return <div>Error: {error}</div>;
-        }
+        onClose();
       }
     } catch (error) {
       console.error("Error deleting song:", error);
@@ -42,8 +34,8 @@ const DeleteSong: React.FC = () => {
         <b>{selectedSong && selectedSong.artist}</b>?
       </p>
 
-      <button onClick={() => navigate("/")}>Cancel</button>
-      <button onClick={handleDelete}>Delete</button>
+      <button onClick={() => onClose()} disabled={isLoading}>Cancel</button>
+      <button onClick={handleDelete} disabled={isLoading}>Delete</button>
     </form>
   );
 };

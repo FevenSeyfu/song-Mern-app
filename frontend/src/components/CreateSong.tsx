@@ -1,11 +1,13 @@
 import React,{useState} from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { createSong } from '../features/Song/SongSlice';
-import { useNavigate } from 'react-router-dom';
+import { RootState } from "../app/store";
 
-const CreateSong: React.FC  = () => {
+interface CreateSongProps {
+  onClose: () => void;
+}
+const CreateSong: React.FC<CreateSongProps> = ({onClose}) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   
   const [title, setTitle] = useState('');
   const [artist, setArtist] = useState('');
@@ -16,14 +18,13 @@ const CreateSong: React.FC  = () => {
     e.preventDefault();
     const song = { title, artist, album , genre}
     dispatch(createSong(song));
-        
     setTitle('');
     setArtist('');
     setAlbum('');
     setGenre('');
-    navigate('/')
+    onClose();
   }
-  
+  const {songs,isLoading,error} = useSelector((state: RootState) => state.songs);
   return (
     <form onSubmit={handleSubmit}>
       <h1>Create Song</h1>
@@ -47,7 +48,7 @@ const CreateSong: React.FC  = () => {
         <input type="text" value={genre} onChange={(e) => setGenre(e.target.value)} required />
       </label>
 
-      <button type="submit">Create Song</button>
+      <button type="submit" disabled={isLoading}>{isLoading? 'Loading' : 'Create Song '}</button>
     </form>
   )
 }

@@ -11,9 +11,10 @@ import Modal from "./Modal/Modal";
 import CreateSong from "./CreateSong";
 import UpdateSong from "./UpdateSong";
 import DeleteSong from "./DeleteSong";
-import Sidebar from "./Sidebar/SideBar";
+
 import { Flex, Heading, Image, Text, Box } from "rebass";
 import styled from "@emotion/styled";
+import Layout from "./Layout";
 
 const Button = styled.button`
   padding: 2px 4px;
@@ -55,7 +56,6 @@ const SongImage = styled(Image)`
 
 const ResponsiveFlex = styled(Flex)`
   padding: 1rem;
-  width:100%;
   @media (min-width: 768px) {
     padding: 2rem;
   }
@@ -91,119 +91,112 @@ const ListSongs: React.FC = () => {
   }
 
   return (
-    <Flex>
-      <Sidebar />
+    <Layout>
       <ResponsiveFlex flexDirection={"column"}>
-        <Flex flexDirection={"row"} alignItems={"center"}>
-          <Heading fontSize={"2rem"} marginRight={"1rem"}>
-            Songs
-          </Heading>
-          <Button
-            onClick={() =>
-              handleOpenModal(<CreateSong onClose={handleCloseModal} />)
-            }
-          >
-            <IoMdAdd />
-          </Button>
-        </Flex>
-        <hr
-          style={{
-            width: "100%",
-            borderColor: "#9290C3",
-            borderWidth: "2px",
-            marginBottom: "1rem",
-          }}
-        />
-        <Flex
-          flexDirection={"row"}
-          justifyContent={"space-between"}
-          alignItems={"center"}
+      <Flex flexDirection={"row"} alignItems={"center"}>
+        <Heading fontSize={"2rem"} marginRight={"1rem"}>
+          Songs
+        </Heading>
+        <Button
+          onClick={() =>
+            handleOpenModal(<CreateSong onClose={handleCloseModal} />)
+          }
         >
-          <Text width={"25%"} fontWeight={"bold"}>
-            Song
-          </Text>
-          <Text width={"25%"} fontWeight={"bold"}>
-            Album
-          </Text>
-          <Text fontWeight={"bold"}>Genre</Text>
-          <Text fontWeight={"bold"}>Actions</Text>
-        </Flex>
-        {isLoading ? (
-          <Text
-            fontWeight="bold"
-            textAlign={"center"}
-            fontSize={"1.5rem"}
-            marginY={"10%"}
-          >
-            <FaSpinner />
-            Loading...
-          </Text>
-        ) : (
-          songs.map((song: Song, index: number) => {
-            return (
-              <>
-                <Flex
-                  key={song._id}
-                  flexDirection={"row"}
-                  justifyContent={"space-between"}
-                  alignItems={"center"}
-                >
-                  <Flex alignItems={"center"} width={"25%"}>
-                    <SongImage src="../../assets/sound-icon.png" />
-                    <Box>
-                      <h3>{song.title}</h3>
-                      <p>{song.artist}</p>
-                    </Box>
-                  </Flex>
-                  <Text width={"25%"}>{song.album}</Text>
-                  <Text textAlign={"center"}>{song.genre}</Text>
-                  <ButtonContainer>
-                    <Button
-                      onClick={() =>
-                        handleOpenModal(
-                          <UpdateSong
-                            onClose={handleCloseModal}
-                            id={song._id}
-                          />
-                        )
-                      }
-                    >
-                      <CiEdit />
-                    </Button>
-                    <Button
-                      onClick={() =>
-                        handleOpenModal(
-                          <DeleteSong
-                            onClose={handleCloseModal}
-                            id={song._id}
-                          />
-                        )
-                      }
-                    >
-                      <MdOutlineDeleteOutline />
-                    </Button>
-                  </ButtonContainer>
+          <IoMdAdd />
+        </Button>
+      </Flex>
+      <hr
+        style={{
+          width: "100%",
+          borderColor: "#9290C3",
+          borderWidth: "2px",
+          marginBottom: "1rem",
+        }}
+      />
+      <Flex
+        flexDirection={"row"}
+        justifyContent={"space-between"}
+        alignItems={"center"}
+      >
+        <Text width={"25%"} fontWeight={"bold"}>
+          Song
+        </Text>
+        <Text width={"25%"} fontWeight={"bold"}>
+          Album
+        </Text>
+        <Text fontWeight={"bold"}>Genre</Text>
+        <Text fontWeight={"bold"}>Actions</Text>
+      </Flex>
+      {isLoading ? (
+        <Text
+          fontWeight="bold"
+          textAlign={"center"}
+          fontSize={"1.5rem"}
+          marginY={"10%"}
+        >
+          <FaSpinner />
+          Loading...
+        </Text>
+      ) : (
+        songs.map((song: Song, index: number) => {
+          return (
+            <>
+              <Flex
+                key={song._id}
+                flexDirection={"row"}
+                justifyContent={"space-between"}
+                alignItems={"center"}
+              >
+                <Flex alignItems={"center"} width={"25%"}>
+                  <SongImage src="../../assets/sound-icon.png" />
+                  <Box>
+                    <h3>{song.title}</h3>
+                    <p>{song.artist}</p>
+                  </Box>
                 </Flex>
-                {index !== songs.length - 1 && (
-                  <hr
-                    style={{
-                      width: "100%",
-                      borderColor: "#9290C3",
-                      marginBottom: "1rem",
-                    }}
-                  />
-                )}
-              </>
-            );
-          })
-        )}
-        <Modal
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          component={modalContent}
-        />
-      </ResponsiveFlex>
-    </Flex>
+                <Text width={"25%"}>{song.album}</Text>
+                <Text textAlign={"center"}>{song.genre}</Text>
+                <ButtonContainer>
+                  <Button
+                    onClick={() =>
+                      handleOpenModal(
+                        <UpdateSong onClose={handleCloseModal} id={song._id} />
+                      )
+                    }
+                  >
+                    <CiEdit />
+                  </Button>
+                  <Button
+                    onClick={() =>
+                      handleOpenModal(
+                        <DeleteSong onClose={handleCloseModal} id={song._id} />
+                      )
+                    }
+                  >
+                    <MdOutlineDeleteOutline />
+                  </Button>
+                </ButtonContainer>
+              </Flex>
+              {index !== songs.length - 1 && (
+                <hr
+                  style={{
+                    width: "100%",
+                    borderColor: "#9290C3",
+                    marginBottom: "1rem",
+                  }}
+                />
+              )}
+            </>
+          );
+        })
+      )}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        component={modalContent}
+      />
+    </ResponsiveFlex>
+    </Layout>
   );
 };
 

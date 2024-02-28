@@ -3,7 +3,7 @@ import { SidebarContainer, Logo, NavLink, Nav, Footer } from "./SidebarStyle";
 
 const Sidebar: React.FC = () => (
   <SidebarContainer>
-    <Logo src="logo.png" alt="Logo" />
+    <Logo>Songs</Logo>
     <Nav>
       <NavLink href="/songs">Songs</NavLink>
       <NavLink href="/song-stats">Song Statistics</NavLink>

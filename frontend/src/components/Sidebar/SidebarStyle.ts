@@ -11,9 +11,11 @@ export const SidebarContainer = styled.div`
   padding: 20px;
 `;
 
-export const Logo = styled.img`
+export const Logo = styled.h1`
   width: 100px;
   margin: 0 auto;
+  font-family: "Kode Mono", monospace;
+  font-style: italic;
 `;
 
 export const Nav = styled.nav`
@@ -31,6 +33,6 @@ export const NavLink = styled.a`
 `;
 
 export const Footer = styled.footer`
-  align-self: center;
   text-align: center;
+  margin-bottom: 20px;
 `;

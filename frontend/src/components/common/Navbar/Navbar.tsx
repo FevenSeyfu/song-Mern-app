@@ -1,44 +1,31 @@
-import React,{useState} from "react";
-import { NavbarContainer, NavLink, Nav, Button } from "./NavbarStyle";
+import React, { useState } from "react";
+import {
+  NavbarContainer,
+  NavLink,
+  Nav,
+  StyledButton,
+} from "./NavbarStyle";
 import LogoItem from "./LogoItem";
-import CreateSong from "../../CreateSong";
-import Modal from "../../Modal/Modal";
-import { IoMdAdd } from "react-icons/io";
+
+import { IoMenu, IoCloseSharp } from "react-icons/io5";
+import MobileMenu from "./MobileMenu";
+import CreateSongButton from "./CreateSongButton";
 
 const Navbar: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState<React.ReactNode | null>(
-    null
-  );
-
-  const handleOpenModal = (component: React.ReactNode) => {
-    setModalContent(component);
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalContent(null);
-    setIsModalOpen(false);
-  };
+  const [isOpen, setIsOpen] = useState(false);
+  
   return (
     <NavbarContainer>
       <LogoItem />
+      <StyledButton onClick={() => setIsOpen(!isOpen)}>
+        {isOpen ? <IoCloseSharp /> : <IoMenu />}
+      </StyledButton>
       <Nav>
-        <Button
-          onClick={() =>
-            handleOpenModal(<CreateSong onClose={handleCloseModal} />)
-          }
-        >
-          <IoMdAdd />
-        </Button>
+        <CreateSongButton />
         <NavLink href="/songs">Songs</NavLink>
         <NavLink href="/song-stats">Song Statistics</NavLink>
       </Nav>
-      <Modal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        component={modalContent}
-      />
+      <MobileMenu isOpen={isOpen} />
     </NavbarContainer>
   );
 };

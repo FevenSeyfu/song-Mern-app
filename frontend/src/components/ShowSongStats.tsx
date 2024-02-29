@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchSongsStats } from "../features/Song/SongSlice";
 import { SongStats } from "../types/types";
 import { RootState } from "../app/store";
+import Layout from "./Layout";
 
 const ShowSongStats: React.FC = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const ShowSongStats: React.FC = () => {
   }
 
   return (
-    <>
+    <Layout>
       {songStats && (
         <div>
           <ul>
@@ -100,7 +101,7 @@ const ShowSongStats: React.FC = () => {
           </div>
         </div>
       )}
-    </>
+    </Layout>
   );
 };
 

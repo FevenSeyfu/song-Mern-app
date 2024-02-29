@@ -12,8 +12,8 @@ const MobileMenu: React.FC<SidebarProps> = ({ isOpen }) => {
       <div style={{ display: "flex", alignItems: "center" }}>
         <CreateSongButton /> Add New
       </div>
-      <NavLink href="/songs">Songs</NavLink>
-      <NavLink href="/song-stats">Song Statistics</NavLink>
+      <NavLink to="/">Songs</NavLink>
+      <NavLink to="/song-stats">Song Statistics</NavLink>
     </MobileMenuContainer>
   );
 };

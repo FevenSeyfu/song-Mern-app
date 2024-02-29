@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { NavLink as RouterNavLink } from 'react-router-dom';
 
 export const NavbarContainer = styled.div`
   display: flex;
@@ -62,11 +63,21 @@ export const Nav = styled.nav`
   }
 `;
 
-export const NavLink = styled.a`
+export const NavLink = styled(RouterNavLink)`
   color: #070F2B;
   text-decoration: none;
   &:hover {
     color: #535C91;
+  }
+  &.active {
+    color: #1B1A55;
+    font-weight: bold;
+  }
+  @media (max-width: 768px) {
+    &.active {
+      color: #9290C3;
+      font-weight: bold;
+    }
   }
 `;
 

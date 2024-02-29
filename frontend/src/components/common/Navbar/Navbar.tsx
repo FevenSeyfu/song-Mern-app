@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  NavbarContainer,
-  NavLink,
-  Nav,
-  StyledButton,
-} from "./NavbarStyle";
+import { NavLink,NavbarContainer, Nav, StyledButton } from "./NavbarStyle";
 import LogoItem from "./LogoItem";
 
 import { IoMenu, IoCloseSharp } from "react-icons/io5";
@@ -13,7 +8,7 @@ import CreateSongButton from "./CreateSongButton";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  
+
   return (
     <NavbarContainer>
       <LogoItem />
@@ -22,8 +17,12 @@ const Navbar: React.FC = () => {
       </StyledButton>
       <Nav>
         <CreateSongButton />
-        <NavLink href="/songs">Songs</NavLink>
-        <NavLink href="/song-stats">Song Statistics</NavLink>
+        <NavLink to="/">
+          Songs
+        </NavLink>
+        <NavLink to="/song-stats">
+          Song Statistics
+        </NavLink>
       </Nav>
       <MobileMenu isOpen={isOpen} />
     </NavbarContainer>

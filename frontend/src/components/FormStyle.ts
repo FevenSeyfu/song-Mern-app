@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 export const CloseButton = styled.div`
   display: flex;
   justify-content: flex-end;
+  color: #9290c3;
 `;
 
 export const StyledForm = styled.form`
@@ -10,6 +11,7 @@ export const StyledForm = styled.form`
   flex-direction: column;
   align-items: center;
   padding: 0 10%;
+  color: #9290c3;
 `;
 
 export const StyledH1 = styled.h1`

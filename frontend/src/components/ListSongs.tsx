@@ -5,14 +5,13 @@ import { Song } from "../types/types";
 import { RootState } from "../app/store";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
-import { IoMdAdd } from "react-icons/io";
 import { FaSpinner } from "react-icons/fa6";
 import Modal from "./Modal/Modal";
-import CreateSong from "./CreateSong";
+
 import UpdateSong from "./UpdateSong";
 import DeleteSong from "./DeleteSong";
 
-import { Flex, Heading, Image, Text, Box } from "rebass";
+import { Flex, Image, Text, Box } from "rebass";
 import styled from "@emotion/styled";
 import Layout from "./Layout";
 
@@ -93,26 +92,6 @@ const ListSongs: React.FC = () => {
   return (
     <Layout>
       <ResponsiveFlex flexDirection={"column"}>
-      <Flex flexDirection={"row"} alignItems={"center"}>
-        <Heading fontSize={"2rem"} marginRight={"1rem"}>
-          Songs
-        </Heading>
-        <Button
-          onClick={() =>
-            handleOpenModal(<CreateSong onClose={handleCloseModal} />)
-          }
-        >
-          <IoMdAdd />
-        </Button>
-      </Flex>
-      <hr
-        style={{
-          width: "100%",
-          borderColor: "#9290C3",
-          borderWidth: "2px",
-          marginBottom: "1rem",
-        }}
-      />
       <Flex
         flexDirection={"row"}
         justifyContent={"space-between"}
@@ -127,6 +106,14 @@ const ListSongs: React.FC = () => {
         <Text fontWeight={"bold"}>Genre</Text>
         <Text fontWeight={"bold"}>Actions</Text>
       </Flex>
+      <hr
+        style={{
+          width: "100%",
+          borderColor: "#9290C3",
+          borderWidth: "2px",
+          marginBottom: "1rem",
+        }}
+      />
       {isLoading ? (
         <Text
           fontWeight="bold"
@@ -151,7 +138,7 @@ const ListSongs: React.FC = () => {
                   <SongImage src="../../assets/sound-icon.png" />
                   <Box>
                     <h3>{song.title}</h3>
-                    <p>{song.artist}</p>
+                    <p>By:{song.artist}</p>
                   </Box>
                 </Flex>
                 <Text width={"25%"}>{song.album}</Text>

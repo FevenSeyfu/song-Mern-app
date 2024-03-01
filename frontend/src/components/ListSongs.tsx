@@ -11,56 +11,17 @@ import Modal from "./Modal/Modal";
 import UpdateSong from "./UpdateSong";
 import DeleteSong from "./DeleteSong";
 
-import { Flex, Image, Text, Box } from "rebass";
-import styled from "@emotion/styled";
+import { Flex, Text, Box } from "rebass";
 import Layout from "./common/Layout";
+import {
+  ResponsiveFlex,
+  SongImage,
+  ButtonContainer,
+  Button,
+  Pagination,
+  StyledActiveButton
+} from "./ListSongsStyle";
 
-const Button = styled.button`
-  padding: 2px 4px;
-  margin: 5px;
-  background: none;
-  border: 1px solid #9290c3;
-  font-size: 1.5rem;
-  font-weight: bold;
-  border-radius: 4px;
-  color: #9290c3;
-  font-weight: bold;
-  &:hover {
-    color: #070f2b;
-    background-color: #9290c3;
-  }
-  @media (max-width: 768px) {
-    padding: 2px 3px;
-    margin: 3px;
-    font-size: 1rem;
-  }
-`;
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-`;
-const SongImage = styled(Image)`
-  height: 36px;
-  padding-right: 20px;
-
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-
-const ResponsiveFlex = styled(Flex)`
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  @media (min-width: 768px) {
-    padding: 2rem;
-  }
-`;
 const ListSongs: React.FC = () => {
   const dispatch = useDispatch();
 
@@ -68,11 +29,15 @@ const ListSongs: React.FC = () => {
     (state: RootState) => state.songs
   );
 
+  //define states
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState<React.ReactNode | null>(
     null
   );
+  const [currentPage, setCurrentPage] = useState(1);
+  const songsPerPage = 5;
 
+  // handle song crud forms modal
   const handleOpenModal = (component: React.ReactNode) => {
     setModalContent(component);
     setIsModalOpen(true);
@@ -86,10 +51,18 @@ const ListSongs: React.FC = () => {
   useEffect(() => {
     dispatch(fetchSongs());
   }, [dispatch]);
-
   if (error) {
     return <div>Error: {error}</div>;
   }
+
+  // handle pagination
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+  const indexOfLastSong = currentPage * songsPerPage;
+  const indexOfFirstSong = indexOfLastSong - songsPerPage;
+  const currentSongs = songs.slice(indexOfFirstSong, indexOfLastSong);
+  const totalPages = Math.ceil(songs.length / songsPerPage);
 
   return (
     <Layout>
@@ -127,7 +100,7 @@ const ListSongs: React.FC = () => {
             Loading...
           </Text>
         ) : (
-          songs.map((song: Song, index: number) => {
+          currentSongs.map((song: Song, index: number) => {
             return (
               <>
                 <Flex
@@ -172,7 +145,7 @@ const ListSongs: React.FC = () => {
                     </Button>
                   </ButtonContainer>
                 </Flex>
-                {index !== songs.length - 1 && (
+                {index !== songs.length && (
                   <hr
                     style={{
                       width: "100%",
@@ -191,6 +164,20 @@ const ListSongs: React.FC = () => {
           component={modalContent}
         />
       </ResponsiveFlex>
+      <Pagination>
+      {Array.from({ length: totalPages }, (_, index) => {
+        const pageNumber = index + 1;
+        return pageNumber === currentPage ? (
+          <StyledActiveButton key={index} onClick={() => handlePageChange(pageNumber)}>
+            {pageNumber}
+          </StyledActiveButton>
+        ) : (
+          <Button key={index} onClick={() => handlePageChange(pageNumber)}>
+            {pageNumber}
+          </Button>
+        );
+      })}
+    </Pagination>
     </Layout>
   );
 };

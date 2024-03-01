@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="" alt="Demo" width="100%" height="auto" />
+  <img src="[/Song App Demo.webm](https://github.com/FevenSeyfu/song-Mern-app/blob/dev/Song%20App%20Demo.webm)" alt="Demo" width="100%" height="auto" />
   <br/>
   <h3><b>Song Management App</b></h3>
 </div>
@@ -11,19 +11,16 @@
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
   - [🚀 Live Demo](#live-demo)
+- [💻 API Documentation](#api-doc)
 - [💻 Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Setup](#setup)
   - [Install](#install)
   - [Usage](#usage)
-  - [Run tests](#run-tests)
-  - [Deployment](#deployment)
 - [👥 Authors](#authors)
 - [🔭 Future Features](#future-features)
 - [🤝 Contributing](#contributing)
 - [⭐️ Show your support](#support)
-- [🙏 Acknowledgements](#acknowledgements)
-- [❓ FAQ (OPTIONAL)](#faq)
 - [📝 License](#license)
 
 <!-- PROJECT DESCRIPTION -->
@@ -52,9 +49,6 @@
   <summary>Server</summary>
   <ul>
     <li><a href="https://expressjs.com/">Express.js</a></li>
-    <li><a href="https://www.mongodb.com/">MongoDB</a></li>
-    
-    <li><a href="https://expressjs.com/">Docker</a></li>
   </ul>
 </details>
 
@@ -66,6 +60,12 @@
   </ul>
 </details>
 
+<details>
+  <summary>Deployment</summary>
+  <ul>
+    <li><a href="https://www.docker.com/">Docker</a></li>
+  </ul>
+</details>
 ### Key Features <a name="key-features"></a>
 
 - **CRUD Operations**: Perform Create, Read, Update, and Delete operations on song information.
@@ -77,7 +77,17 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- [Live Demo Link](https://song-app-live-demo.com)
+- [Live Demo Link](https://addis-songapp.netlify.app)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- API DOC -->
+
+## 💻API Documentation <a name="api-doc"></a>
+
+The Backend Rest API of the song APP is Deployed on render
+- [Backend URL](https://song-api-pncl.onrender.com/songs/)
+- [Backend Doc](https://github.com/FevenSeyfu/song-Mern-app/blob/main/backend/README.md)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -106,12 +116,9 @@ cd song-Mern-app
 
 Install this project with:
 
-<!--
-Example command:
-
 ```sh
-  cd my-project
-  gem install
+  cd frontend
+  npm install
 ```
 --->
 
@@ -119,37 +126,10 @@ Example command:
 
 To run the project, execute the following command:
 
-<!--
-Example command:
-
 ```sh
-  rails server
+  cd frontend
+  npm start
 ```
---->
-
-### Run tests
-
-To run tests, run the following command:
-
-<!--
-Example command:
-
-```sh
-  bin/rails test test/models/article_test.rb
-```
---->
-
-### Deployment
-
-You can deploy this project using:
-
-<!--
-Example:
-
-```sh
-
-```
- -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -157,19 +137,11 @@ Example:
 
 ## 👥 Authors <a name="authors"></a>
 
-> Mention all of the collaborators of this project.
+👤 **Author**
 
-👤 **Author1**
-
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
-
-👤 **Author2**
-
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
+- GitHub: [@githubhandle](https://github.com/FevenSeyfu)
+- Twitter: [@twitterhandle](https://www.twitter.com/FevenSeyfu)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/fevenseyfu/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -177,11 +149,9 @@ Example:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-> Describe 1 - 3 features you will add to the project.
-
-- [ ] **[new_feature_1]**
-- [ ] **[new_feature_2]**
-- [ ] **[new_feature_3]**
+- [x] **[Create,delete,update and delete Song]**
+- [x] **[fetch and display song list along with overall song statistics]**
+- [x] **[filter and display songs by artist,album genre and albums grouped by artist]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -199,35 +169,7 @@ Feel free to check the [issues page](../../issues/).
 
 ## ⭐️ Show your support <a name="support"></a>
 
-> Write a message to encourage readers to support your project
-
-If you like this project...
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ACKNOWLEDGEMENTS -->
-
-## 🙏 Acknowledgments <a name="acknowledgements"></a>
-
-> Give credit to everyone who inspired your codebase.
-
-I would like to thank...
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- FAQ (optional) -->
-
-## ❓ FAQ (OPTIONAL) <a name="faq"></a>
-
-> Add at least 2 questions new developers would ask when they decide to use your project.
-
-- **[Question_1]**
-
-  - [Answer_1]
-
-- **[Question_2]**
-
-  - [Answer_2]
+If you find this project useful and it adds value to your work, consider showing your support by giving it a ⭐️ (star). Your feedback and support are incredibly motivating.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -236,7 +178,5 @@ I would like to thank...
 ## 📝 License <a name="license"></a>
 
 This project is [MIT](./LICENSE) licensed.
-
-_NOTE: we recommend using the [MIT license](https://choosealicense.com/licenses/mit/) - you can set it up quickly by [using templates available on GitHub](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository). You can also use [any other license](https://choosealicense.com/licenses/) if you wish._
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

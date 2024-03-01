@@ -7,9 +7,9 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import { FaSpinner } from "react-icons/fa6";
 import Modal from "./Modal/Modal";
-
 import UpdateSong from "./UpdateSong";
 import DeleteSong from "./DeleteSong";
+import {  toast } from 'react-toastify';
 
 import { Flex, Text, Box } from "rebass";
 import Layout from "./common/Layout";
@@ -51,8 +51,9 @@ const ListSongs: React.FC = () => {
   useEffect(() => {
     dispatch(fetchSongs());
   }, [dispatch]);
+
   if (error) {
-    return <div>Error: {error}</div>;
+    toast.error(error)
   }
 
   // handle pagination

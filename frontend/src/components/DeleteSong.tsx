@@ -11,6 +11,7 @@ import {
   StyledActiveButton,
   ButtonContainer,
 } from "./FormStyle";
+import {  toast } from 'react-toastify';
 
 interface DeleteSongProps {
   onClose: () => void;
@@ -27,10 +28,11 @@ const DeleteSong: React.FC<DeleteSongProps> = ({ onClose, id }) => {
     try {
       if (id) {
         dispatch(deleteSong(id));
+        toast.warning('Song deleted!')
         onClose();
       }
     } catch (error) {
-      console.error("Error deleting song:", error);
+      toast.error(`Error deleting song:, ${error}`);
     }
   };
   return (

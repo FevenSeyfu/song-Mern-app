@@ -11,6 +11,7 @@ import {
   StyledButton,
   StyledInput,
 } from "./FormStyle";
+import {  toast } from 'react-toastify';
 
 interface CreateSongProps {
   onClose: () => void;
@@ -31,6 +32,9 @@ const CreateSong: React.FC<CreateSongProps> = ({ onClose }) => {
     setArtist("");
     setAlbum("");
     setGenre("");
+    if(!isLoading && !error){
+      toast.success('Successfully Created a New Song!')
+    }
     onClose();
   };
   const { songs, isLoading, error } = useSelector(

@@ -4,6 +4,8 @@ import CreateSong from "./components/CreateSong";
 import DeleteSong from "./components/DeleteSong";
 import ListSongs from "./components/ListSongs";
 import ShowSongStats from "./components/SongStats/ShowSongStats";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App: React.FC = () => (
   <BrowserRouter>
@@ -11,6 +13,7 @@ const App: React.FC = () => (
       <Route path="/" element={<ListSongs />} />
       <Route path="/song-stats" element={<ShowSongStats />} />
     </Routes>
+    <ToastContainer theme="dark"/>
   </BrowserRouter>
 );
 

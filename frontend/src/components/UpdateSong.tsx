@@ -11,6 +11,7 @@ import {
   StyledButton,
   StyledInput
 } from "./FormStyle";
+import {  toast } from 'react-toastify';
 
 interface UpdateSongProps {
   onClose: () => void;
@@ -53,7 +54,10 @@ const UpdateSong: React.FC<UpdateSongProps> = ({ onClose, id }) => {
     setAlbum("");
     setGenre("");
     if(!isLoading && !error){
+      toast.success('Successfully Updated Song!')
       onClose();
+    }else if(error){
+      toast.error(`Error updating song:${error}`)
     }
   };
   return (

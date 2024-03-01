@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink,NavbarContainer, Nav, StyledButton } from "./NavbarStyle";
+import { NavLink,NavbarContainer, Nav, StyledButton } from "../../../assets/style/NavbarStyle";
 import LogoItem from "./LogoItem";
 
 import { IoMenu, IoCloseSharp } from "react-icons/io5";

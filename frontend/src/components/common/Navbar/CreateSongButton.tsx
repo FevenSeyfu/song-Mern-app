@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
-import { Button } from "./NavbarStyle";
+import { Button } from "../../../assets/style/NavbarStyle";
 import CreateSong from "../../CreateSong";
 import Modal from "../../Modal/Modal";
 

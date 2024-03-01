@@ -14,7 +14,7 @@ import {
   ListContainer,
   StyledH2,
   StyledSongsList,
-} from "./ShowSongStatsStyle";
+} from "../../assets/style/ShowSongStatsStyle";
 
 const ShowSongStats: React.FC = () => {
   const dispatch = useDispatch();

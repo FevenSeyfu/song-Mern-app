@@ -2,8 +2,8 @@ import React from "react";
 import styled from "@emotion/styled";
 
 const FooterContainer = styled.footer`
-//   position: fixed;
-//   bottom:0;
+  position: relative;
+  bottom:0;
   width: 100%;
   background-color: #9290c3;
   color: #070f2b;

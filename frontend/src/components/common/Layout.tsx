@@ -1,11 +1,12 @@
 import React from "react";
-import Navbar from "./common/Navbar/Navbar";
+import Navbar from "./Navbar/Navbar";
 import styled from "@emotion/styled";
-import Footer from "./common/Footer";
+import Footer from "./Footer";
 
 const LayoutContainer = styled.div`
   display: flex;
   flex-direction:column;
+  min-height: 100vh;
 `;
 const MainContent = styled.main`
   flex: 1;

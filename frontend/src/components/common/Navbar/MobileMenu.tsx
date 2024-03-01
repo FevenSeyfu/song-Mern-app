@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, MobileMenuContainer } from "./NavbarStyle";
+import { NavLink, MobileMenuContainer } from "../../../assets/style/NavbarStyle";
 import CreateSongButton from "./CreateSongButton";
 
 interface SidebarProps {

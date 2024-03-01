@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSongs, updateSong } from "../features/Song/SongSlice";
+import { updateSong } from "../features/Song/SongSlice";
 import { RootState } from "../app/store";
 import { IoClose } from "react-icons/io5";
 import {
@@ -10,7 +10,7 @@ import {
   StyledLabel,
   StyledButton,
   StyledInput
-} from "./FormStyle";
+} from "../assets/style/FormStyle";
 import {  toast } from 'react-toastify';
 
 interface UpdateSongProps {

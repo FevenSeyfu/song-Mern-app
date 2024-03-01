@@ -10,7 +10,7 @@ import {
   StyledLabel,
   StyledButton,
   StyledInput,
-} from "./FormStyle";
+} from "../assets/style/FormStyle";
 import {  toast } from 'react-toastify';
 
 interface CreateSongProps {
@@ -18,7 +18,9 @@ interface CreateSongProps {
 }
 const CreateSong: React.FC<CreateSongProps> = ({ onClose }) => {
   const dispatch = useDispatch();
-
+  const { isLoading, error } = useSelector(
+    (state: RootState) => state.songs
+  );
   const [title, setTitle] = useState("");
   const [artist, setArtist] = useState("");
   const [album, setAlbum] = useState("");
@@ -37,9 +39,7 @@ const CreateSong: React.FC<CreateSongProps> = ({ onClose }) => {
     }
     onClose();
   };
-  const { songs, isLoading, error } = useSelector(
-    (state: RootState) => state.songs
-  );
+  
   return (
     <>
       <CloseButton onClick={() => onClose()}>

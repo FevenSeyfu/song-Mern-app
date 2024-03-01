@@ -20,7 +20,7 @@ import {
   Button,
   Pagination,
   StyledActiveButton
-} from "./ListSongsStyle";
+} from "../assets/style/ListSongsStyle";
 
 const ListSongs: React.FC = () => {
   const dispatch = useDispatch();

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ModalOverlay, ModalContainer } from './ModalStyle';
+import { ModalOverlay, ModalContainer } from '../../assets/style/ModalStyle';
 
 interface ModalProps {
   isOpen: boolean;

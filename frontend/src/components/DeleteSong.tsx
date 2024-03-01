@@ -10,7 +10,7 @@ import {
   StyledButton,
   StyledActiveButton,
   ButtonContainer,
-} from "./FormStyle";
+} from "../assets/style/FormStyle";
 import {  toast } from 'react-toastify';
 
 interface DeleteSongProps {

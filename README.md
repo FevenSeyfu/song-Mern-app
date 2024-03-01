@@ -1,6 +1,8 @@
 
 <div align="center">
-  <video src="https://github.com/FevenSeyfu/song-Mern-app/blob/dev/Song%20App%20Demo.webm" alt="Demo" width="100%" height="auto" />
+  <video width="100%" height="auto" controls>
+   <source src="https://github.com/FevenSeyfu/song-Mern-app/blob/dev/Song%20App%20Demo.webm"" type="video/webm">
+  </video>
   <br/>
   <h3><b>Song Management App</b></h3>
 </div>
